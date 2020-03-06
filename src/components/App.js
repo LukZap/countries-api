@@ -7,7 +7,7 @@ import CountryDetail from './CountryDetail';
 
 const App = () => {
     return (
-        <div>
+        <div className="wrapper">
             <BrowserRouter>
                 <Header />
                 <Route path="/" exact component={Main} />

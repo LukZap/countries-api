@@ -1,0 +1,85 @@
+@import "variables";
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body, #root, .wrapper {
+    min-height: 100vh;
+}
+
+header, main {
+    padding-left: calc((100% - 1200px) / 2);
+    padding-right: calc((100% - 1200px) / 2);
+}
+
+header {
+    position: absolute;
+    width: 100%;
+    height: $HeaderHeight;
+    background-color: $White;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: $BoxShadow;
+}
+
+main {
+    padding-top: calc(40px + #{$HeaderHeight});
+    padding-bottom: 40px;
+    height: 100vh;
+    background-color: $VeryLightGray;
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+input {
+   padding: 22px 40px 19px 70px;
+   border: none;
+   border-radius: 5px;
+   box-shadow: $BoxShadow;
+   font-size: 0.8em;
+   color: $DarkGray;
+}
+
+select {
+   font-size: 0.8em;
+   border-radius: 5px;
+   padding: 22px 50px 19px 20px;
+   border: none;
+   box-shadow: $BoxShadow;
+}
+
+.search-filter-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.theme-mode {
+    font-weight: 600;
+}
+
+.input-wrapper {
+    position: relative;
+
+    input {
+        width: 300px;
+    }
+
+    i {
+        color: $DarkGray;
+        position: absolute;
+        left: 30px;
+        top: 50%;
+        transform: (translateY(-50%));
+    }
+}
