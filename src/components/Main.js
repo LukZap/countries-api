@@ -2,14 +2,17 @@ import React from 'react'
 import { connect } from "react-redux";
 import { fetchCountries } from "../actions";
 import CountryCard from './CountryCard';
+import Select from './Select'
 
 class Main extends React.Component {
+    options = ['Africa','Americas','Europe','Asia','Oceania'];
+
     componentDidMount() {
         this.props.fetchCountries();
     }
 
-    selectChange = (event) => {
-        this.props.fetchCountries(event.target.value);
+    onSelectChange = (selectedOption) => {
+        this.props.fetchCountries(selectedOption);
     }
 
     renderCountriesList = () => {
@@ -20,19 +23,14 @@ class Main extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="main-wrapper">
                 <div className="search-filter-menu">
                     <div className="input-wrapper">
                         <input type="search" placeholder="Search for a country..." />
                         <i className="fas fa-search"></i>
                     </div>
-                    <select onChange={this.selectChange}>
-                        <option value="africa">Africa</option>
-                        <option value="americas">Americas</option>
-                        <option value="asia">Asia</option>
-                        <option value="europe">Europe</option>
-                        <option value="oceania">Oceania</option>
-                    </select>
+                    <Select options={this.options} title='Filter by Region' 
+                        onChange={this.onSelectChange} />
                 </div>
 
                 <div className="countries-list">
