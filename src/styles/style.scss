@@ -83,6 +83,7 @@ input {
         left: 30px;
         top: 50%;
         transform: (translateY(-50%));
+        cursor: pointer;
     }
 }
 
@@ -138,8 +139,12 @@ input {
     border-radius: 3px;
     box-shadow: $BoxShadow;	
     padding: 5px 20px;
-    margin: 0 3px 6px;
+    margin: 3px ;
     white-space: nowrap;
+}
+
+.country-details-wrapper {
+    font-size: .8rem;
 }
 
 .country-details {
@@ -153,15 +158,28 @@ input {
         margin-right: 50px;
     }
 
+    strong {
+        font-weight: 700;
+    }
+
     &__right-section {
         flex: 1;
         display: flex;
         flex-direction: column;
+        padding-top: 40px;
     }
 
     &__info-container {
         display: flex;
         margin-bottom: 20px;
+    }
+
+    &__title {
+        margin-bottom: 20px;
+    }
+
+    &__info-item {
+        margin: 6px 0;
     }
 
     &__general-info {
@@ -176,13 +194,20 @@ input {
         flex-direction: column;
     }
 
-    &__border-countries {
+    &__border-countries-container {
         display: flex;
+        align-items: center;
+    }
+
+    &__border-countries {
+        margin-right: 15px;
     }
 
     &__badges {
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
+        font-size: .7rem;
+        align-items: center;
     }
 }

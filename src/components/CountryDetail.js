@@ -4,36 +4,28 @@ import { Redirect } from 'react-router-dom';
 import { fetchCountry } from '../actions'
 
 class CountryDetail extends React.Component {
-    state = { goToHome: false}; 
-
     componentDidMount() {
         const name = this.props.match.params.countryName;
         this.props.fetchCountry(name);
     }
 
     onBackButtonClick = () => {
-        this.setState({goToHome: true})
+        this.props.history.goBack();
     }
 
     renderBorderCountries = () => {
         return this.props.country.borders.map(x => {
-            const borderCountry = x //this.props.countries.find(c => c.alpha3Code === x);
-            if(!borderCountry) return null; // just problem when country is on different continent
-            return <span className="border-badge" key={borderCountry}>{borderCountry}</span>;
+            return <span className="border-badge" key={x}>{x}</span>;
         })
     }
 
     render() {
-        if (this.state.goToHome) {
-            return <Redirect push to="/" />;
-        }
-
         if (!this.props.country) {
             return <div>No country</div>;
         }
 
         return (
-            <div>
+            <div className="country-details-wrapper">
                 <button className="back-button" onClick={this.onBackButtonClick}>
                     <i className="fas fa-arrow-left"></i>
                     Back
@@ -74,8 +66,8 @@ class CountryDetail extends React.Component {
                                 </span>
                             </div>
                         </div>
-                        <div className="country-details__border-countries">
-                            <div>
+                        <div className="country-details__border-countries-container">
+                            <div className="country-details__border-countries">
                                 <strong>Border&nbsp;Countries:&nbsp;</strong>
                             </div>
                             <div className="country-details__badges">
@@ -84,7 +76,6 @@ class CountryDetail extends React.Component {
                         </div>
                     </div>
                 </div>
-
             </div>
         );
     }
