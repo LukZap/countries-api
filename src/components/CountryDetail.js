@@ -31,7 +31,9 @@ class CountryDetail extends React.Component {
                 </button>
 
                 <div className="country-details">
-                    <img src={this.props.country.flag} alt={`Flag of ${this.props.country.name}`} />
+                    <div className="country-details__img-container">
+                        <img src={this.props.country.flag} alt={`Flag of ${this.props.country.name}`} />
+                    </div>
                     <div className="country-details__right-section">
                         <h1 className="country-details__title">{this.props.country.name}</h1>
                         <div className="country-details__info-container">

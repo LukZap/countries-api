@@ -20,11 +20,11 @@ class Main extends React.Component {
         const values = queryString.parse(this.props.location.search)
         if (values && values.region) {
             const option = this.options.find(x => x.toLowerCase() === values.region.toLowerCase());
-            if(option) {
+            if (option) {
                 this.props.fetchCountries(option);
-                this.setState({selected: option})
+                this.setState({ selected: option })
             }
-        } else if(values && values.search) {
+        } else if (values && values.search) {
             this.props.searchCountries(values.search);
             this.searchInput.current.value = values.search;
         } else {
@@ -36,14 +36,12 @@ class Main extends React.Component {
         this.props.fetchCountries(selectedOption);
         this.props.history.push(`/?region=${selectedOption}`);
         this.searchInput.current.value = '';
-        this.setState({selected: selectedOption})
+        this.setState({ selected: selectedOption })
     }
 
     renderCountriesList = () => {
         return this.props.countries.map(country =>
-            <div className="country-card-wrapper" key={country.name} >
-                <CountryCard country={country} />
-            </div>
+            <CountryCard country={country} key={country.name} />
         );
     }
 
@@ -70,8 +68,10 @@ class Main extends React.Component {
                             onKeyUp={this.onUserTypedToInput} ref={this.searchInput} />
                         <i className="fas fa-search" onClick={this.findCountries}></i>
                     </div>
-                    <Select options={this.options} title='Filter by Region'
-                        onChange={this.onSelectChange} selected={this.state.selected}/>
+                    <div className="custom-select-wrapper">
+                        <Select options={this.options} title='Filter by Region'
+                            onChange={this.onSelectChange} selected={this.state.selected} />
+                    </div>
                 </div>
 
                 <div className="countries-list">

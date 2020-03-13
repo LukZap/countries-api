@@ -43,7 +43,7 @@ header {
 main {
     padding-top: calc(40px + #{$HeaderHeight});
     padding-bottom: 40px;
-    height: 100vh;
+    min-height: 100vh;
     background-color: $VeryLightGray;
 }
 
@@ -72,10 +72,19 @@ input {
 }
 
 .search-filter-menu {
+    // display: grid;
+    // grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    // grid-gap: 20px 20px;
+
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 40px;
+    margin: -10px -10px 30px;
+
+    & > * {
+        margin: 10px 10px;
+    }
 }
 
 .theme-mode {
@@ -106,12 +115,7 @@ input {
 .countries-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    grid-gap: 60px 50px;
-}
-
-.country-card-wrapper {
-    display: flex;
-    justify-content: center;
+    grid-gap: 45px 45px;
 }
 
 .country-card {
@@ -122,11 +126,13 @@ input {
     box-shadow: $BoxShadow;	
     cursor: pointer;
     max-width: 270px;
+    min-width: 220px;
+    justify-self: center;
 
     &__info-section {
         display: flex;
         flex-direction: column;
-        padding: 15px;
+        padding: 25px 20px;
     }
 
     &__title {
@@ -171,14 +177,20 @@ input {
 }
 
 .country-details {
-    margin-top: 40px;
+    margin: 40px -20px 0;
     display: flex;
-    flex-wrap: nowrap;
-    align-items: stretch;
+    flex-wrap: wrap;
+    justify-content: center;
 
-    img {
-        max-width: 500px;
-        margin-right: 50px;
+    & > * {
+        margin: 0 20px;
+    }
+
+    &__img-container {
+        flex: 0.2 1 500px;
+        img {
+            width: 100%;
+        }
     }
 
     strong {
@@ -186,15 +198,20 @@ input {
     }
 
     &__right-section {
-        flex: 1;
+        flex: 0.3 1 450px;
         display: flex;
         flex-direction: column;
         padding-top: 40px;
     }
 
     &__info-container {
+        margin: -12px 0;
         display: flex;
-        margin-bottom: 20px;
+        flex-wrap: wrap;
+
+        & > * {
+            margin: 12px 0;
+        }
     }
 
     &__title {
@@ -202,17 +219,20 @@ input {
     }
 
     &__info-item {
-        margin: 6px 0;
+        margin: 4px 0;
+        line-height: 1.3;
     }
 
     &__general-info {
-        flex: 1; 
+        flex: 1;
+        min-width: 220px;
         display: flex;
         flex-direction: column;
     }
 
     &__secondary-info {
-        flex: 1; 
+        flex: 1;
+        min-width: 220px;
         display: flex;
         flex-direction: column;
     }
@@ -220,6 +240,7 @@ input {
     &__border-countries-container {
         display: flex;
         align-items: center;
+        margin-top: 20px;
     }
 
     &__border-countries {

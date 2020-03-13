@@ -48,15 +48,13 @@ class Select extends React.Component {
 
     render() {
         return (
-            <div onClick={this.toggle} className="custom-select-wrapper">
-                <div className={this.state.selectOpen ? "custom-select open" : "custom-select"}>
-                    <div className="custom-select__trigger">
-                        <span>{this.props.selected || this.props.title}</span>
-                        <div className="arrow"></div>
-                    </div>
-                    <div className="custom-options">
-                        {this.renderOptions()}
-                    </div>
+            <div onClick={this.toggle} className={this.state.selectOpen ? "custom-select open" : "custom-select"}>
+                <div className="custom-select__trigger">
+                    <span>{this.props.selected || this.props.title}</span>
+                    <div className="arrow"></div>
+                </div>
+                <div className="custom-options">
+                    {this.renderOptions()}
                 </div>
             </div>
         );
