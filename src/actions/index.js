@@ -1,4 +1,4 @@
-import { FETCH_COUNTRIES, FETCH_COUNTRY } from './types';
+import { FETCH_COUNTRIES, FETCH_COUNTRY, SEARCH_COUNTRIES } from './types';
 import countriesApi from '../api/countriesApi'
 
 export const fetchCountries = continent => async dispatch => {
@@ -11,6 +11,15 @@ export const fetchCountries = continent => async dispatch => {
 
     dispatch({
         type: FETCH_COUNTRIES,
+        payload: response.data
+    });
+};
+
+export const searchCountries = searchQuery => async dispatch => {
+    const response = await countriesApi.get(`/name/${searchQuery}`);
+
+    dispatch({
+        type: SEARCH_COUNTRIES,
         payload: response.data
     });
 };

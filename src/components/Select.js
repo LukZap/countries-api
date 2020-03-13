@@ -2,32 +2,32 @@ import React from 'react';
 import '../styles/select.scss';
 
 class Select extends React.Component {
-    state = {selectOpen: false}
+    state = { selectOpen: false }
 
     toggle = () => {
-        this.setState({selectOpen: !this.state.selectOpen});
+        this.setState({ selectOpen: !this.state.selectOpen });
     }
 
     // how to do that better?
     onClick = (event) => {
         var changed = false;
 
-        if(!event.target.parentNode.querySelector('.custom-option.selected')) {
+        if (!event.target.parentNode.querySelector('.custom-option.selected')) {
             event.target.classList.add('selected');
             event.target.closest('.custom-select')
-            .querySelector('.custom-select__trigger span')
-            .textContent = event.target.textContent;
+                .querySelector('.custom-select__trigger span')
+                .textContent = event.target.textContent;
             changed = true;
         } else if (!event.target.classList.contains('selected')) {
             event.target.parentNode.querySelector('.custom-option.selected').classList.remove('selected');
             event.target.classList.add('selected');
             event.target.closest('.custom-select')
-            .querySelector('.custom-select__trigger span')
-            .textContent = event.target.textContent;
+                .querySelector('.custom-select__trigger span')
+                .textContent = event.target.textContent;
             changed = true;
         }
 
-        if(changed) {
+        if (changed) {
             this.props.onChange(event.target.getAttribute("data-value"));
         }
     }
@@ -35,9 +35,9 @@ class Select extends React.Component {
     renderOptions = () => {
         return this.props.options.map(x => {
             return (
-                <span 
-                    className="custom-option"
-                    data-value={x.toLowerCase()}
+                <span
+                    className={this.props.selected === x ? "custom-option selected" : "custom-option"}
+                    data-value={x}
                     key={x}
                     onClick={this.onClick}>
                     {x}
@@ -49,9 +49,9 @@ class Select extends React.Component {
     render() {
         return (
             <div onClick={this.toggle} className="custom-select-wrapper">
-                <div className={this.state.selectOpen ? "custom-select open" : "custom-select" }>
+                <div className={this.state.selectOpen ? "custom-select open" : "custom-select"}>
                     <div className="custom-select__trigger">
-                        <span>{this.props.title}</span>
+                        <span>{this.props.selected || this.props.title}</span>
                         <div className="arrow"></div>
                     </div>
                     <div className="custom-options">

@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import { fetchCountry } from '../actions'
 
 class CountryDetail extends React.Component {
@@ -38,7 +37,7 @@ class CountryDetail extends React.Component {
                         <div className="country-details__info-container">
                             <div className="country-details__general-info">
                                 <span className="country-details__info-item">
-                                    <strong>Native Name: </strong>{this.props.country.name}
+                                    <strong>Native Name: </strong>{this.props.country.nativeName}
                                 </span>                            
                                 <span className="country-details__info-item">
                                     <strong>Population: </strong>{this.props.country.population.toLocaleString()}

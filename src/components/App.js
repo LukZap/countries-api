@@ -10,10 +10,12 @@ const App = () => {
         <div className="wrapper">
             <Header />
             <main>
-                <BrowserRouter>
-                    <Route path="/" exact component={Main} />
-                    <Route path="/:countryName" component={CountryDetail} />
-                </BrowserRouter>
+                <div style={{padding: '0 20px'}}>
+                    <BrowserRouter>
+                        <Route path="/" exact component={Main} />
+                        <Route path="/:countryName" component={CountryDetail} />
+                    </BrowserRouter>
+                </div>
             </main>
         </div>
     );

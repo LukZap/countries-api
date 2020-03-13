@@ -15,7 +15,7 @@ class CountryCard extends React.Component {
 
         return (
             <div className="country-card" key={this.props.country.name} onClick={this.onClick}>
-                <img src={this.props.country.flag} alt={`Flag of ${this.props.country.name}`} width="100%" />
+                <div className="country-card__img" style={{backgroundImage:  "url(" + this.props.country.flag + ")"}}></div>
                 <div className="country-card__info-section">
                     <h3 className="country-card__title">{this.props.country.name}</h3>
                     <span className="country-card__info-detail"><strong>Population:</strong> {this.props.country.population.toLocaleString()}</span>

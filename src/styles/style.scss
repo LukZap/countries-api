@@ -22,10 +22,22 @@ header {
     width: 100%;
     height: $HeaderHeight;
     background-color: $White;
+    box-shadow: $BoxShadow;
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h1 {
+        font-size: 1.3rem;  
+    }
+}
+
+.header-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: $BoxShadow;
+    padding: 0 20px;
 }
 
 main {
@@ -67,7 +79,7 @@ input {
 }
 
 .theme-mode {
-    font-weight: 800;
+    font-weight: 700;
 }
 
 .input-wrapper {
@@ -92,21 +104,24 @@ input {
 }
 
 .countries-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-gap: 60px 50px;
+}
+
+.country-card-wrapper {
     display: flex;
-    flex-wrap: wrap;
-    margin: 0 -10px;
+    justify-content: center;
 }
 
 .country-card {
-    width: 200px;
-    height: 300px;
-    margin: 0 10px;
-    margin-bottom: 20px;
+    width: 100%;
     background-color: $White;
     border-radius: 6px;
     overflow: hidden;
     box-shadow: $BoxShadow;	
     cursor: pointer;
+    max-width: 270px;
 
     &__info-section {
         display: flex;
@@ -116,6 +131,13 @@ input {
 
     &__title {
         margin-bottom: 1rem;
+    }
+
+    &__img {
+        width: 100%;
+        height: 150px;
+        background-size: cover;
+        background-position: center;
     }
 
     &__info-detail {
@@ -138,6 +160,7 @@ input {
 .border-badge {
     border-radius: 3px;
     box-shadow: $BoxShadow;	
+    background-color: $White;
     padding: 5px 20px;
     margin: 3px ;
     white-space: nowrap;
