@@ -1,6 +1,6 @@
 import React, { createRef } from 'react'
 import { connect } from "react-redux";
-import { fetchCountries, searchCountries } from "../actions";
+import { fetchCountries } from "../actions";
 import CountryCard from './CountryCard';
 import Select from './Select'
 import queryString from 'query-string'
@@ -17,26 +17,36 @@ class Main extends React.Component {
     }
 
     componentDidMount() {
-        const values = queryString.parse(this.props.location.search)
+        this.getListFromQuery(this.props.location.search);
+    }
+
+    getListFromQuery = (query) => {
+        const values = queryString.parse(query);
         if (values && values.region) {
             const option = this.options.find(x => x.toLowerCase() === values.region.toLowerCase());
             if (option) {
-                this.props.fetchCountries(option);
+                this.props.fetchCountries('region', option);
                 this.setState({ selected: option })
             }
         } else if (values && values.search) {
-            this.props.searchCountries(values.search);
+            this.props.fetchCountries('name', values.search);
             this.searchInput.current.value = values.search;
+            this.setState({ selected: null })
         } else {
             this.props.fetchCountries();
+            this.setState({ selected: null })
+        }
+    }
+
+    componentDidUpdate(prevProps) {
+        if(this.props.location.search !== prevProps.location.search) {
+            this.getListFromQuery(this.props.location.search);
         }
     }
 
     onSelectChange = (selectedOption) => {
-        this.props.fetchCountries(selectedOption);
         this.props.history.push(`/?region=${selectedOption}`);
         this.searchInput.current.value = '';
-        this.setState({ selected: selectedOption })
     }
 
     renderCountriesList = () => {
@@ -48,7 +58,6 @@ class Main extends React.Component {
     findCountries = () => {
         const searchQuery = this.searchInput.current.value;
         if (searchQuery) {
-            this.props.searchCountries(searchQuery);
             this.props.history.push(`/?search=${searchQuery}`);
         }
     }
@@ -83,10 +92,12 @@ class Main extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    return { countries: state.countries };
+    return { 
+        countries: state.countries.countries,
+    };
 }
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, { fetchCountries, searchCountries })
+    connect(mapStateToProps, { fetchCountries })
 )(Main);

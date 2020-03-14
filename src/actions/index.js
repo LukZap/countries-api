@@ -1,33 +1,54 @@
-import { FETCH_COUNTRIES, FETCH_COUNTRY, SEARCH_COUNTRIES } from './types';
+import { FETCH_COUNTRIES, FETCH_COUNTRY } from './types';
 import countriesApi from '../api/countriesApi'
 
-export const fetchCountries = continent => async dispatch => {
+export const fetchCountries = (type, query)  => async (dispatch, getState) => {
+    const state = getState();
+    if(state.countries.searchType === type && state.countries.searchQuery === query) {
+        return;
+    }
+    
     let response;
-    if (continent) {
-        response = await countriesApi.get(`/region/${continent}`);
-    } else {
+    if(!query || !type) {
         response = await countriesApi.get('/all');
-    };
+    } else if (type === 'region') {
+        response = await countriesApi.get(`/region/${query}`);
+    } else if (type === 'name') {
+        response = await countriesApi.get(`/name/${query}`);
+    }
 
     dispatch({
         type: FETCH_COUNTRIES,
-        payload: response.data
+        payload: {
+            searchType: type,
+            searchQuery: query,
+            countries: response.data,
+        }
     });
 };
 
-export const searchCountries = searchQuery => async dispatch => {
-    const response = await countriesApi.get(`/name/${searchQuery}`);
+export const fetchCountry = name => async (dispatch, getState) => {
+    const state = getState();
+
+    // check if current country is already in store
+    if(state.country && state.country.name === name)
+        return;
 
     dispatch({
-        type: SEARCH_COUNTRIES,
-        payload: response.data
+        type: FETCH_COUNTRY,
+        payload: null
     });
-};
 
-export const fetchCountry = name => async dispatch => {
-    const responseCountry = await countriesApi.get(`/name/${name}`);
-    const country = responseCountry.data[0];
+    // check if current country is already in list of countries in store
+    let country;
+    const countryFromList = state.countries.countries.find(x => x.name === name);
+    if(countryFromList) {
+        country = {...countryFromList}
+    } else {
+        const responseCountry = await countriesApi.get(`/name/${name}`);
+        country = responseCountry.data[0];
+    }
 
+    // fetch full country names for border badges
     const borders = country.borders;
     if (borders && borders.length > 0) {
         const codes = borders.join(';');

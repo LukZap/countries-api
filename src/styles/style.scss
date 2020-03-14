@@ -6,6 +6,21 @@
 
 html {
     height: 100%;
+    color: var(--primaryTextColor);
+}
+
+html {
+    --primaryBackground: #{$White};
+    --secondaryBackground: #{$VeryLightGray};
+    --primaryTextColor: #{$VeryDarkBlue2};
+    --secondaryTextColor: #{$DarkGray};
+}
+
+html[data-theme="dark"] {
+    --primaryBackground: #{$DarkBlue};
+    --secondaryBackground: #{$VeryDarkBlue};
+    --primaryTextColor: #{$White};
+    --secondaryTextColor: #{$White};
 }
 
 body, #root, .wrapper {
@@ -21,7 +36,7 @@ header {
     position: absolute;
     width: 100%;
     height: $HeaderHeight;
-    background-color: $White;
+    background-color: var(--primaryBackground);
     box-shadow: $BoxShadow;
     font-size: 0.85rem;
     display: flex;
@@ -30,6 +45,8 @@ header {
 
     h1 {
         font-size: 1.3rem;  
+        margin-right: 15px;
+        cursor: pointer;
     }
 }
 
@@ -44,7 +61,7 @@ main {
     padding-top: calc(40px + #{$HeaderHeight});
     padding-bottom: 40px;
     min-height: 100vh;
-    background-color: $VeryLightGray;
+    background-color: var(--secondaryBackground);
 }
 
 h1 {
@@ -68,14 +85,9 @@ input {
    box-shadow: $BoxShadow;
    font-size: .7rem;
    letter-spacing: 0.02rem;
-   color: $DarkGray;
 }
 
 .search-filter-menu {
-    // display: grid;
-    // grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    // grid-gap: 20px 20px;
-
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -89,17 +101,27 @@ input {
 
 .theme-mode {
     font-weight: 700;
+    cursor: pointer;
 }
 
 .input-wrapper {
     position: relative;
+    flex: 1 300px;
+    max-width: 400px;
 
     input {
-        width: 300px;
+        box-sizing: border-box;
+        width: 100%;
+        color: var(--secondaryTextColor);
+        background-color: var(--primaryBackground);
+    }
+    
+    input::placeholder {
+        color: var(--secondaryTextColor);
     }
 
     i {
-        color: $DarkGray;
+        color: var(--secondaryTextColor);
         position: absolute;
         left: 30px;
         top: 50%;
@@ -120,7 +142,7 @@ input {
 
 .country-card {
     width: 100%;
-    background-color: $White;
+    background-color: var(--primaryBackground);
     border-radius: 6px;
     overflow: hidden;
     box-shadow: $BoxShadow;	
@@ -154,7 +176,8 @@ input {
 .back-button {
     border: none;
     border-radius: 3px;
-    background-color: $White;
+    background-color: var(--primaryBackground);
+    color: var(--primaryTextColor);
     box-shadow: $BoxShadow;	
     padding: 8px 30px;
 
@@ -166,7 +189,7 @@ input {
 .border-badge {
     border-radius: 3px;
     box-shadow: $BoxShadow;	
-    background-color: $White;
+    background-color: var(--primaryBackground);
     padding: 5px 20px;
     margin: 3px ;
     white-space: nowrap;
@@ -205,12 +228,12 @@ input {
     }
 
     &__info-container {
-        margin: -12px 0;
+        margin: -12px;
         display: flex;
         flex-wrap: wrap;
 
         & > * {
-            margin: 12px 0;
+            margin: 12px;
         }
     }
 
@@ -253,5 +276,15 @@ input {
         flex-direction: row;
         font-size: .7rem;
         align-items: center;
+    }
+}
+
+@media (max-width: 450px) {
+    header {
+        font-size: 0.75rem;
+    
+        h1 {
+            font-size: 1.06rem;  
+        }
     }
 }

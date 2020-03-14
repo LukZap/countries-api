@@ -8,15 +8,15 @@ import CountryDetail from './CountryDetail';
 const App = () => {
     return (
         <div className="wrapper">
-            <Header />
-            <main>
-                <div style={{padding: '0 20px'}}>
-                    <BrowserRouter>
+            <BrowserRouter>
+                <Header />
+                <main>
+                    <div style={{ padding: '0 20px' }}>
                         <Route path="/" exact component={Main} />
                         <Route path="/:countryName" component={CountryDetail} />
-                    </BrowserRouter>
-                </div>
-            </main>
+                    </div>
+                </main>
+            </BrowserRouter>
         </div>
     );
 }

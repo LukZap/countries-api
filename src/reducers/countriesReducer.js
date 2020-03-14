@@ -1,10 +1,19 @@
-import { FETCH_COUNTRIES, SEARCH_COUNTRIES } from '../actions/types'
+import { FETCH_COUNTRIES } from '../actions/types'
 
-export default (state = [], action) => {
+const initialState = {
+    searchType: null,
+    searchQuery: null,
+    countries: []
+}
+
+export default (state = initialState, action) => {
     switch(action.type) {
-        case SEARCH_COUNTRIES:
         case FETCH_COUNTRIES:
-            return [...action.payload];
+            return { 
+                searchType: action.payload.searchType,
+                searchQuery: action.payload.searchQuery,
+                countries: action.payload.countries,
+            }
         default:
             return state;
     }

@@ -67,14 +67,18 @@ class CountryDetail extends React.Component {
                                 </span>
                             </div>
                         </div>
-                        <div className="country-details__border-countries-container">
-                            <div className="country-details__border-countries">
-                                <strong>Border&nbsp;Countries:&nbsp;</strong>
+                        {
+                            this.props.country.borders && this.props.country.borders.length > 0  ?
+                            <div className="country-details__border-countries-container">
+                                <div className="country-details__border-countries">
+                                    <strong>Border&nbsp;Countries:&nbsp;</strong>
+                                </div>
+                                <div className="country-details__badges">
+                                    {this.renderBorderCountries()}
+                                </div>
                             </div>
-                            <div className="country-details__badges">
-                                {this.renderBorderCountries()}
-                            </div>
-                        </div>
+                            : null
+                        }
                     </div>
                 </div>
             </div>
