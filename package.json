@@ -23,9 +23,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build_staging",
-    "deploy": "gh-pages -d build",
-    "build_staging": "PUBLIC_URL=http://lukzap.github.io/countries-api react-scripts build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -44,5 +43,6 @@
   },
   "devDependencies": {
     "gh-pages": "^2.2.0"
-  }
+  },
+  "homepage": "https://lukzap.github.io/countries-api"
 }
