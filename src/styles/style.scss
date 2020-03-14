@@ -114,10 +114,10 @@ input {
         width: 100%;
         color: var(--secondaryTextColor);
         background-color: var(--primaryBackground);
-    }
-    
-    input::placeholder {
-        color: var(--secondaryTextColor);
+
+        &::placeholder {
+            color: var(--secondaryTextColor);
+        }
     }
 
     i {
