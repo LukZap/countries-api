@@ -5,11 +5,12 @@
 }
 
 .country-details {
-    margin: 40px -20px 0;
+    margin: 40px -20px 0 ;// gap between flex items
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 
+    // gap between flex items
     & > * {
         margin: 0 20px;
     }
@@ -33,10 +34,11 @@
     }
 
     &__info-container {
-        margin: -12px;
+        margin: -12px; // gap between flex items
         display: flex;
         flex-wrap: wrap;
 
+        // gap between flex items
         & > * {
             margin: 12px;
         }

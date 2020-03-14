@@ -1,31 +1,31 @@
 @import "variables";
 
 // select styles
-.custom-select-wrapper {
-    position: relative;
-    user-select: none;
-    width: 200px;
-    border-radius: 6px;
-    font-weight: 600;
-}
-
 .custom-select {
     position: relative;
     display: flex;
     flex-direction: column;
     box-shadow: $BoxShadow;	
     border-radius: 6px;
-}
 
-.custom-select__trigger {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 22px 20px 19px;
-    background-color: var(--primaryBackground);
-    cursor: pointer;
-    border-radius: 6px;
+    &-wrapper {
+        position: relative;
+        user-select: none;
+        width: 200px;
+        border-radius: 6px;
+        font-weight: 600;
+    }
+
+    &__trigger {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 22px 20px 19px;
+        background-color: var(--primaryBackground);
+        cursor: pointer;
+        border-radius: 6px;
+    }
 }
 
 .custom-options {
