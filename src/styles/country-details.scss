@@ -100,9 +100,11 @@
 }
 
 .border-badge {
+    border: none;
     border-radius: 3px;
     box-shadow: $BoxShadow;	
     background-color: var(--primaryBackground);
+    color: var(--primaryTextColor);
     padding: 5px 20px;
     margin: 3px ;
     white-space: nowrap;

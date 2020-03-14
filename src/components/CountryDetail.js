@@ -9,13 +9,30 @@ class CountryDetail extends React.Component {
         this.props.fetchCountry(name);
     }
 
+    componentDidUpdate(prevProps) {
+        if(this.props.match.params.countryName !== prevProps.match.params.countryName) {
+            this.props.fetchCountry(this.props.match.params.countryName);
+        }
+    }
+
     onBackButtonClick = () => {
         this.props.history.goBack();
     }
 
+    onBadgeClick = (countryName) => {
+        this.props.history.push(`/${countryName}`);
+    }
+
     renderBorderCountries = () => {
-        return this.props.country.borders.map(x => {
-            return <span className="border-badge" key={x}>{x}</span>;
+        return this.props.country.borders.map(borderCountry => {
+            return (
+                <button 
+                    className="border-badge"
+                    onClick={() => this.onBadgeClick(borderCountry)}
+                    key={borderCountry}>
+                    {borderCountry}
+                </button>
+            )
         })
     }
 
