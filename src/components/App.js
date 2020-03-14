@@ -11,7 +11,7 @@ const App = () => {
             <HashRouter>
                 <Header />
                 <main>
-                    <div style={{ padding: '0 20px' }}>
+                    <div className="app-container">
                         <Route path="/" exact component={Main} />
                         <Route path="/:countryName" component={CountryDetail} />
                     </div>

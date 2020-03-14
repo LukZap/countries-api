@@ -1,5 +1,6 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom';
+import '../styles/country-card.scss';
 
 class CountryCard extends React.Component {
     state = {redirect: false};

@@ -33,14 +33,14 @@ class Select extends React.Component {
     }
 
     renderOptions = () => {
-        return this.props.options.map(x => {
+        return this.props.options.map(option => {
             return (
                 <span
-                    className={this.props.selected === x ? "custom-option selected" : "custom-option"}
-                    data-value={x}
-                    key={x}
+                    className={this.props.selected === option ? "custom-option selected" : "custom-option"}
+                    data-value={option}
+                    key={option}
                     onClick={this.onClick}>
-                    {x}
+                    {option}
                 </span>
             )
         })

@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { fetchCountry } from '../actions'
+import '../styles/country-details.scss';
 
 class CountryDetail extends React.Component {
     componentDidMount() {
@@ -40,13 +41,13 @@ class CountryDetail extends React.Component {
                             <div className="country-details__general-info">
                                 <span className="country-details__info-item">
                                     <strong>Native Name: </strong>{this.props.country.nativeName}
-                                </span>                            
+                                </span>
                                 <span className="country-details__info-item">
                                     <strong>Population: </strong>{this.props.country.population.toLocaleString()}
-                                </span>                            
+                                </span>
                                 <span className="country-details__info-item">
                                     <strong>Region: </strong>{this.props.country.region}
-                                </span>           
+                                </span>
                                 <span className="country-details__info-item">
                                     <strong>Sub Region: </strong>{this.props.country.subregion}
                                 </span>
@@ -60,24 +61,24 @@ class CountryDetail extends React.Component {
                                     <strong>Top Level Domain: </strong>{this.props.country.topLevelDomain.join(', ')}
                                 </span>
                                 <span className="country-details__info-item">
-                                    <strong>Currencies: </strong>{ this.props.country.currencies.map(x => x.name).join(', ')}
-                                </span>                                
+                                    <strong>Currencies: </strong>{this.props.country.currencies.map(x => x.name).join(', ')}
+                                </span>
                                 <span className="country-details__info-item">
                                     <strong>Languages: </strong>{this.props.country.languages.map(x => x.name).join(', ')}
                                 </span>
                             </div>
                         </div>
                         {
-                            this.props.country.borders && this.props.country.borders.length > 0  ?
-                            <div className="country-details__border-countries-container">
-                                <div className="country-details__border-countries">
-                                    <strong>Border&nbsp;Countries:&nbsp;</strong>
+                            this.props.country.borders && this.props.country.borders.length > 0 ?
+                                <div className="country-details__border-countries-container">
+                                    <div className="country-details__border-countries">
+                                        <strong>Border&nbsp;Countries:&nbsp;</strong>
+                                    </div>
+                                    <div className="country-details__badges">
+                                        {this.renderBorderCountries()}
+                                    </div>
                                 </div>
-                                <div className="country-details__badges">
-                                    {this.renderBorderCountries()}
-                                </div>
-                            </div>
-                            : null
+                                : null
                         }
                     </div>
                 </div>

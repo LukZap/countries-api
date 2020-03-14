@@ -1,0 +1,34 @@
+@import "variables";
+
+.country-card {
+    width: 100%;
+    background-color: var(--primaryBackground);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: $BoxShadow;	
+    cursor: pointer;
+    max-width: 270px;
+    min-width: 220px;
+    justify-self: center;
+
+    &__info-section {
+        display: flex;
+        flex-direction: column;
+        padding: 25px 20px;
+    }
+
+    &__title {
+        margin-bottom: 1rem;
+    }
+
+    &__img {
+        width: 100%;
+        height: 150px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    &__info-detail {
+        margin-bottom: .5rem;
+    }
+}
