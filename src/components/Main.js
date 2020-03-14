@@ -50,9 +50,13 @@ class Main extends React.Component {
     }
 
     renderCountriesList = () => {
-        return this.props.countries.map(country =>
-            <CountryCard country={country} key={country.name} />
-        );
+        if(this.props.countries) {
+            return this.props.countries.map(country =>
+                <CountryCard country={country} key={country.name} />
+            );
+        } else {
+            return <div>No countres found</div>
+        }
     }
 
     findCountries = () => {

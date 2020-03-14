@@ -8,22 +8,34 @@ export const fetchCountries = (type, query)  => async (dispatch, getState) => {
     }
     
     let response;
-    if(!query || !type) {
-        response = await countriesApi.get('/all');
-    } else if (type === 'region') {
-        response = await countriesApi.get(`/region/${query}`);
-    } else if (type === 'name') {
-        response = await countriesApi.get(`/name/${query}`);
+    try {
+        if(!query || !type) {
+            response = await countriesApi.get('/all');
+        } else if (type === 'region') {
+            response = await countriesApi.get(`/region/${query}`);
+        } else if (type === 'name') {
+            response = await countriesApi.get(`/name/${query}`);
+        }
+    
+        dispatch({
+            type: FETCH_COUNTRIES,
+            payload: {
+                searchType: type,
+                searchQuery: query,
+                countries: response.data,
+            }
+        });
+    } catch {
+        dispatch({
+            type: FETCH_COUNTRIES,
+            payload: {
+                searchType: type,
+                searchQuery: query,
+                countries: null,
+            }
+        });
     }
 
-    dispatch({
-        type: FETCH_COUNTRIES,
-        payload: {
-            searchType: type,
-            searchQuery: query,
-            countries: response.data,
-        }
-    });
 };
 
 export const fetchCountry = name => async (dispatch, getState) => {
@@ -44,8 +56,12 @@ export const fetchCountry = name => async (dispatch, getState) => {
     if(countryFromList) {
         country = {...countryFromList}
     } else {
-        const responseCountry = await countriesApi.get(`/name/${name}`);
-        country = responseCountry.data[0];
+        try {
+            const responseCountry = await countriesApi.get(`/name/${name}`);
+            country = responseCountry.data[0];
+        } catch {
+            return;
+        }
     }
 
     // fetch full country names for border badges
