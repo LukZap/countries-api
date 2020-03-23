@@ -86,12 +86,16 @@
     }
 }
 
-.back-button {
+.badge {
     border: none;
     border-radius: 3px;
+    box-shadow: $BoxShadow;	
     background-color: var(--primaryBackground);
     color: var(--primaryTextColor);
-    box-shadow: $BoxShadow;	
+    white-space: nowrap;
+}
+
+.back-button {
     padding: 8px 30px;
 
     i {
@@ -99,13 +103,7 @@
     }
 }
 
-.border-badge {
-    border: none;
-    border-radius: 3px;
-    box-shadow: $BoxShadow;	
-    background-color: var(--primaryBackground);
-    color: var(--primaryTextColor);
+.border-button {
     padding: 5px 20px;
     margin: 3px ;
-    white-space: nowrap;
 }

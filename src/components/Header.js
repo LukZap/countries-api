@@ -15,9 +15,9 @@ class Header extends React.Component {
 
     render() {
         return (
-            <header>
-                <div className="header-wrapper">
-                    <h1 onClick={this.goToMainPage}>Where in the world?</h1>
+            <header className="header flex-row">
+                <div className="flex-row flex-row--space-between container">
+                    <h1 className="heading header__title" onClick={this.goToMainPage}>Where in the world?</h1>
                     <span onClick={this.changeTheme} className="theme-mode">
                         <i className={this.state.theme === 'Dark' ? "far fa-moon" : "fas fa-moon"}
                             style={{ marginRight: '7px' }}></i>

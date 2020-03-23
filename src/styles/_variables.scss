@@ -2,3 +2,8 @@
 
 $HeaderHeight: 80px;
 $BoxShadow: 0px 0px 6px 1px rgba(0,0,0,0.1);
+
+// Breakpoints
+@mixin mobile {
+    @media (max-width: 450px) { @content; }
+}

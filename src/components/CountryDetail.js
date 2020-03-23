@@ -27,7 +27,7 @@ class CountryDetail extends React.Component {
         return this.props.country.borders.map(borderCountry => {
             return (
                 <button 
-                    className="border-badge"
+                    className="border-button badge"
                     onClick={() => this.onBadgeClick(borderCountry)}
                     key={borderCountry}>
                     {borderCountry}
@@ -43,7 +43,7 @@ class CountryDetail extends React.Component {
 
         return (
             <div className="country-details-wrapper">
-                <button className="back-button" onClick={this.onBackButtonClick}>
+                <button className="back-button badge" onClick={this.onBackButtonClick}>
                     <i className="fas fa-arrow-left"></i>
                     Back
                 </button>
@@ -53,7 +53,7 @@ class CountryDetail extends React.Component {
                         <img src={this.props.country.flag} alt={`Flag of ${this.props.country.name}`} />
                     </div>
                     <div className="country-details__right-section">
-                        <h1 className="country-details__title">{this.props.country.name}</h1>
+                        <h1 className="heading heading--h1 country-details__title">{this.props.country.name}</h1>
                         <div className="country-details__info-container">
                             <div className="country-details__general-info">
                                 <span className="country-details__info-item">

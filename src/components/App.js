@@ -10,7 +10,7 @@ const App = () => {
         <div className="wrapper">
             <HashRouter>
                 <Header />
-                <main>
+                <main className="main">
                     <div className="app-container">
                         <Route path="/" exact component={Main} />
                         <Route path="/:countryName" component={CountryDetail} />

@@ -27,44 +27,42 @@ body, #root, .wrapper {
     min-height: 100vh;
 }
 
-header, main {
+.header, .main {
     padding-left: calc((100% - 1200px) / 2);
     padding-right: calc((100% - 1200px) / 2);
 }
 
-header {
-    position: absolute;
-    width: 100%;
+.header {
+    position: relative; // to display box-shadow properly
     height: $HeaderHeight;
-    background-color: var(--primaryBackground);
     box-shadow: $BoxShadow;
     font-size: 0.85rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    background-color: var(--primaryBackground);
 
-    h1 {
+    &__title {
         font-size: 1.3rem;  
         margin-right: 15px;
         cursor: pointer;
     }
 }
 
-main {
-    padding-top: calc(40px + #{$HeaderHeight});
+.main {
+    padding-top: 40px;
     padding-bottom: 40px;
     min-height: 100vh;
     background-color: var(--secondaryBackground);
 }
 
-h1 {
-    font-size: 1.5rem;
+.heading {
     font-weight: 800;
-}
 
-h3 {
-    font-size: 1rem;
-    font-weight: 800;
+    &--h1 {
+        font-size: 1.5rem;
+    }
+
+    &--h3 {
+        font-size: 1rem;
+    }
 }
 
 strong {
@@ -80,11 +78,45 @@ input {
    letter-spacing: 0.02rem;
 }
 
-.header-wrapper {
+// Container
+.container {
+    width: calc(100% - 40px);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+// Flex containers
+.flex-row {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
     align-items: center;
-    padding: 0 20px;
+    justify-content: center;
+    
+    &--space-between {
+        justify-content: space-between;
+    }
+
+    &--align-start {
+        align-items: start;
+    }
+    
+    &__item {
+      max-width: 100%;
+    }
+}
+  
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &--align-start {
+        align-items: start;
+    }
+
+    &__item {
+        max-width: 100%;
+    }
 }
 
 .app-container {
@@ -144,11 +176,11 @@ input {
     grid-gap: 45px 45px;
 }
 
-@media (max-width: 450px) {
-    header {
+@include mobile {
+    .header {
         font-size: 0.75rem;
     
-        h1 {
+        &__title {
             font-size: 1.06rem;  
         }
     }
