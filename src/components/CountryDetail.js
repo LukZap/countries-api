@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 
 import '../styles/country-details.scss';
 import useCountry from './useCountry';
-import CountryDetailInfo from './CountryDetailInfo';
 
 const CountryDetail = () => {
     const country = useSelector(state => state.country)
@@ -80,5 +79,12 @@ const CountryDetail = () => {
     }
 }
 
+const CountryDetailInfo = ({title, info}) => {
+    return (
+        <span className="country-details__info-item">
+            <strong>{title}: </strong>{info}
+        </span>
+    )
+}
 
 export default CountryDetail;
