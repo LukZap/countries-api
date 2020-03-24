@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import classNames from 'classnames'
 
@@ -6,30 +6,15 @@ import '../styles/select.scss';
 
 const Select = ({options, title, onChange, selected}) => {
     const [selectOpen, setSelectOpen] = useState(false)
-    
+    const [selectedOption, setSelectedOption] = useState(null)
 
-    // how to do that better?
-    const onClick = (event) => {
-        let changed = false;
+    useEffect(() => {
+        setSelectedOption(selected)
+    }, [selected])
 
-        if (!event.target.parentNode.querySelector('.custom-option.selected')) {
-            event.target.classList.add('selected');
-            event.target.closest('.custom-select')
-                .querySelector('.custom-select__trigger span')
-                .textContent = event.target.textContent;
-            changed = true;
-        } else if (!event.target.classList.contains('selected')) {
-            event.target.parentNode.querySelector('.custom-option.selected').classList.remove('selected');
-            event.target.classList.add('selected');
-            event.target.closest('.custom-select')
-                .querySelector('.custom-select__trigger span')
-                .textContent = event.target.textContent;
-            changed = true;
-        }
-
-        if (changed) {
-            onChange(event.target.getAttribute("data-value"));
-        }
+    const onClick = (option) => {
+        setSelectedOption(option)
+        onChange(option);
     }
 
     const renderOptions = () => {
@@ -37,9 +22,8 @@ const Select = ({options, title, onChange, selected}) => {
             return (
                 <span
                     className={classNames('custom-option', {selected: selected === option})}
-                    data-value={option}
                     key={option}
-                    onClick={onClick}>
+                    onClick={() => onClick(option)}>
                     {option}
                 </span>
             )
@@ -49,7 +33,7 @@ const Select = ({options, title, onChange, selected}) => {
     return (
         <div onClick={() => setSelectOpen(!selectOpen)} className={classNames('custom-select', {open: selectOpen})}>
             <div className="custom-select__trigger">
-                <span>{selected || title}</span>
+                <span>{selectedOption || title}</span>
                 <div className="arrow"></div>
             </div>
             <div className="custom-options">
