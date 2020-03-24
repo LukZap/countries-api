@@ -1,16 +1,16 @@
 import React from 'react';
+import { useState } from 'react';
+import classNames from 'classnames'
+
 import '../styles/select.scss';
 
-class Select extends React.Component {
-    state = { selectOpen: false }
-
-    toggle = () => {
-        this.setState({ selectOpen: !this.state.selectOpen });
-    }
+const Select = ({options, title, onChange, selected}) => {
+    const [selectOpen, setSelectOpen] = useState(false)
+    
 
     // how to do that better?
-    onClick = (event) => {
-        var changed = false;
+    const onClick = (event) => {
+        let changed = false;
 
         if (!event.target.parentNode.querySelector('.custom-option.selected')) {
             event.target.classList.add('selected');
@@ -28,37 +28,35 @@ class Select extends React.Component {
         }
 
         if (changed) {
-            this.props.onChange(event.target.getAttribute("data-value"));
+            onChange(event.target.getAttribute("data-value"));
         }
     }
 
-    renderOptions = () => {
-        return this.props.options.map(option => {
+    const renderOptions = () => {
+        return options.map(option => {
             return (
                 <span
-                    className={this.props.selected === option ? "custom-option selected" : "custom-option"}
+                    className={classNames('custom-option', {selected: selected === option})}
                     data-value={option}
                     key={option}
-                    onClick={this.onClick}>
+                    onClick={onClick}>
                     {option}
                 </span>
             )
         })
     }
 
-    render() {
-        return (
-            <div onClick={this.toggle} className={this.state.selectOpen ? "custom-select open" : "custom-select"}>
-                <div className="custom-select__trigger">
-                    <span>{this.props.selected || this.props.title}</span>
-                    <div className="arrow"></div>
-                </div>
-                <div className="custom-options">
-                    {this.renderOptions()}
-                </div>
+    return (
+        <div onClick={() => setSelectOpen(!selectOpen)} className={classNames('custom-select', {open: selectOpen})}>
+            <div className="custom-select__trigger">
+                <span>{selected || title}</span>
+                <div className="arrow"></div>
             </div>
-        );
-    }
+            <div className="custom-options">
+                {renderOptions()}
+            </div>
+        </div>
+    );
 }
 
 export default Select;
