@@ -67,7 +67,7 @@ export const fetchCountry = name => async (dispatch, getState) => {
     // fetch full country names for border badges
     const borders = country.borders;
     if (borders && borders.length > 0) {
-        const codes = borders.join(';');
+        const codes = borders.join(',');
         const responseCodes = await countriesApi.get(`/alpha?codes=${codes}`);
         country.borders = responseCodes.data.map(x => x.name)
     }
