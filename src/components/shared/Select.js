@@ -1,20 +1,16 @@
-import React, { useEffect } from 'react';
+import classNames from 'classnames';
+import React from 'react';
 import { useState } from 'react';
-import classNames from 'classnames'
 
-import '../styles/select.scss';
-
-const Select = ({options, title, onChange, selected}) => {
+const Select = ({options, title, onSelect, selected}) => {
     const [selectOpen, setSelectOpen] = useState(false)
-    const [selectedOption, setSelectedOption] = useState(null)
 
-    useEffect(() => {
-        setSelectedOption(selected)
-    }, [selected])
+    const handleOptionSelect = (option) => {
+        onSelect(option);
+    }
 
-    const onClick = (option) => {
-        setSelectedOption(option)
-        onChange(option);
+    const handleOpenCloseSelect = () => {
+        setSelectOpen(opened => !opened)
     }
 
     const renderOptions = () => {
@@ -23,7 +19,7 @@ const Select = ({options, title, onChange, selected}) => {
                 <span
                     className={classNames('custom-option', {selected: selected === option})}
                     key={option}
-                    onClick={() => onClick(option)}>
+                    onClick={() => handleOptionSelect(option)}>
                     {option}
                 </span>
             )
@@ -31,9 +27,9 @@ const Select = ({options, title, onChange, selected}) => {
     }
 
     return (
-        <div onClick={() => setSelectOpen(!selectOpen)} className={classNames('custom-select', {open: selectOpen})}>
+        <div onClick={handleOpenCloseSelect} className={classNames('custom-select', {open: selectOpen})}>
             <div className="custom-select__trigger">
-                <span>{selectedOption || title}</span>
+                <span>{selected || title}</span>
                 <div className="arrow"></div>
             </div>
             <div className="custom-options">

@@ -1,0 +1,1 @@
+export const regions = ['Africa', 'Americas', 'Europe', 'Asia', 'Oceania'];

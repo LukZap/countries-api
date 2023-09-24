@@ -1,21 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useHistory } from "react-router";
-import queryString from 'query-string'
+import { useHistory } from "react-router";
 
 import { fetchCountries } from "../actions";
-import SearchInput from './SearchInput'
+import CountrySearchInput from './CountrySearchInput'
 import CountryCard from './CountryCard';
-import Select from './Select'
+import RegionSelect from './RegionSelect'
+import useQueryParams from './useQueryParams';
+import { regions } from '../consts';
+ 
+
+const renderCountriesList = (countries) => {
+    if (countries) {
+        return countries.map(country =>
+            <CountryCard country={country} key={country.name} />
+        );
+    }
+
+    return <div>No countres found</div>
+}
 
 const Main = () => {
-    // for state
-    const options = ['Africa', 'Americas', 'Europe', 'Asia', 'Oceania'];
-    const [selected, setSelected] = useState(null)
-    const [inputValue, setInputValue] = useState('')
-
     // for routing
-    const { search } = useLocation();
+    const queryParams = useQueryParams()
     const history = useHistory();
 
     // for store
@@ -23,62 +30,43 @@ const Main = () => {
     const countries = useSelector(state => state.countries.countries)
 
     useEffect(() => {
-        getListFromQuery(search);
-    }, [search])
+        if(!queryParams) {
+            dispatch(fetchCountries())
+            return
+        }
 
-    const getListFromQuery = (query) => {
-        const values = queryString.parse(query);
-
-        if (values && values.region) {
-            const option = options.find(x => x.toLowerCase() === values.region.toLowerCase());
+        if (queryParams.region) {
+            const option = regions.find(x => x.toLowerCase() === queryParams.region.toLowerCase());
             if (option) {
                 dispatch(fetchCountries('region', option))
-                setSelected(option);
             }
-        } else if (values && values.search) {
-            dispatch(fetchCountries('name', values.search))
-            setInputValue(values.search)
-            setSelected(null)
-        } else {
-            dispatch(fetchCountries())
-            setSelected(null)
+        } else if (queryParams.country) {
+            dispatch(fetchCountries('name', queryParams.country))
         }
-    }
-    
-    const findCountries = (val) => {
-        history.push(val ? `/?search=${val}` : '/')
+    }, [queryParams, dispatch])
+
+    const handleInputDebunce = (countrySearch) => {
+        history.push(countrySearch ? `/?country=${countrySearch}` : '/')
     }
 
-    const onSelectChange = (selectedOption) => {
-        history.push(`/?region=${selectedOption}`);
-        setInputValue('')
-    }
-
-    const renderCountriesList = () => {
-        if (countries) {
-            return countries.map(country =>
-                <CountryCard country={country} key={country.name} />
-            );
-        } else {
-            return <div>No countres found</div>
-        }
+    const handleSelectChange = (selectedRegion) => {
+        history.push(`/?region=${selectedRegion}`);
     }
 
     return (
         <div className="main-wrapper">
             <div className="search-filter-menu">
                 <div className="input-wrapper">
-                    <SearchInput onChange={findCountries} text={inputValue} />
+                    <CountrySearchInput onDebounce={handleInputDebunce} />
                     <i className="fas fa-search" />
                 </div>
                 <div className="custom-select-wrapper">
-                    <Select options={options} title='Filter by Region'
-                        onChange={onSelectChange} selected={selected} />
+                    <RegionSelect onChange={handleSelectChange} />
                 </div>
             </div>
 
             <div className="countries-list">
-                {renderCountriesList()}
+                {renderCountriesList(countries)}
             </div>
         </div>
     );

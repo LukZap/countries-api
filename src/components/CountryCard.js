@@ -6,8 +6,10 @@ import '../styles/country-card.scss';
 const CountryCard = ({ country }) => {
     const history = useHistory()
 
+    const handleCardClick = () => history.push(`/${country.name}`);
+
     return (
-        <div className="country-card" key={country.name} onClick={() =>  history.push(`/${country.name}`)}>
+        <div className="country-card" key={country.name} onClick={handleCardClick}>
             <div className="country-card__img" style={{ backgroundImage: `url(${country.flag})` }}></div>
             <div className="country-card__info-section">
                 <h3 className="heading heading--h3 country-card__title">{country.name}</h3>

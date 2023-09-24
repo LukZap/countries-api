@@ -1,7 +1,7 @@
 import { FETCH_COUNTRIES, FETCH_COUNTRY } from './types';
 import countriesApi from '../api/countriesApi'
 
-export const fetchCountries = (type, query)  => async (dispatch, getState) => {
+export const fetchCountries = (type, query) => async (dispatch, getState) => {
     const state = getState();
     if(state.countries.searchType === type && state.countries.searchQuery === query) {
         return;

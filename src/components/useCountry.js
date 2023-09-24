@@ -9,7 +9,7 @@ const useCountry = () => {
     
     useEffect(() => {
         dispatch(fetchCountry(countryName))
-    }, [countryName])
+    }, [countryName, dispatch])
 }
 
 export default useCountry;
